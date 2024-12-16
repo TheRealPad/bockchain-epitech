@@ -1,0 +1,14 @@
+.token {
+    display: flex;
+    flex-direction: column;
+}
+
+.pokemon {
+    display: inline-flex;
+    gap: 1rem;
+}
+
+.card {
+    height: 15rem;
+    width: 10rem;
+}

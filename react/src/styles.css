@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+}
+
+.App {
+    font-family: sans-serif;
+}
+
+.MainApp {
+    display: grid;
+}
+
+button {
+    margin: 2px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px lightseagreen;
+    background-color: lightblue;
+}
+
+button:hover {
+    background-color: lightsalmon;
+}
+
+button:active {
+    will-change: transform;
+    box-shadow: 0px 0px;
+    transform: translate3d(2px, 2px, 0);
+}
+
+button:disabled {
+    background-color: lightgray;
+    box-shadow: 0px 0px;
+    transform: translate3d(0, 0, 0);
+}
+
+.WalletWrapper {
+    display: grid;
+    margin: 10px;
+}
+
+.Wallet {
+    display: grid;
+}
+
+.WalletRow {
+    margin: 2px 5px;
+}
+
+.header {
+    font-weight: bold;
+    background-color: lightblue;
+}
+
+ul {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
