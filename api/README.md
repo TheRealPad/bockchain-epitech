@@ -8,6 +8,7 @@ Relevant details of each cards:
 - rarity
 - Pokémon number
 - image
+- card condition
 
 ## Features
 - [ ] Tokenization of Real-World Assets
