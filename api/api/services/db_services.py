@@ -1,11 +1,9 @@
 import sqlite3
-from api.config.db.init_db import DB_FILE
-from xrpl.core.addresses import is_valid_classic_address
+from api.config.db.db_init import DB_FILE
+from xrpl.core.addresscodec import is_valid_classic_address
 
 def validate_xrp_address(address):
-    if is_valid_classic_address(address):
-        return True
-    return False
+    return is_valid_classic_address(address)
 
 
 def add_wallet_address(wallet_address):
