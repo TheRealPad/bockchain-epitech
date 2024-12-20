@@ -3,7 +3,7 @@ from flask import Flask
 
 from api.config.error import errors
 from api.controllers.routes import register_routes
-from api.db.init_db import initialize_database
+from api.config.db.db_init import initialize_database
 
 def init_app():
     load_dotenv()

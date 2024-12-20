@@ -1,7 +1,6 @@
-import os
 import sqlite3
 
-DB_FILE = "api/db/db_file.db"
+DB_FILE = "api/config/db/db_file.db"
 
 def initialize_database():
     connection = sqlite3.connect(DB_FILE)

@@ -1,3 +1,7 @@
 .venv
 .idea
 .env
+__pycache__
+api/config/__pycache__
+api/services/__pycache__
+api/controllers/__pycache__

@@ -5,15 +5,19 @@
 For the purpose of the project, we decide to use the Pokémon cards.
 Relevant details of each cards:
 - name
+- edition
+- card_number
 - rarity
-- Pokémon number
+- type
 - image
-- card condition
+- description
 
 ## Features
-- [ ] Tokenization of Real-World Assets
-- [ ] View Tokenized assets
-- [ ] Manage their ownership
-- [ ] Trade tokens on the XRP Ledger
-- [ ] Marketplace, list their tokenized assets for sale
-- [ ] Marketplace, participate in trading activities with other users on the platform
+- [x] Create Wallet
+- [x] Retrieve Wallet
+- [x] Mint NFT
+- [x] Retrieve all NFTs from a Wallet
+- [ ] Create sell offer for an NFT
+- [ ] Create buy offer for an NFT
+- [ ] Accept a buy offer for an NFT
+- [ ] Retrieve all NFT's sell offers
