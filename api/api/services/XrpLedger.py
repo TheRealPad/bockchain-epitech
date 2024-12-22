@@ -9,9 +9,8 @@ from xrpl.utils import str_to_hex
 from xrpl.models.transactions import NFTokenMint
 from xrpl.models.requests import NFTSellOffers
 import json
-import requests
 
-from api.services.db_services import is_metadata_unique, save_metadata
+from api.services.db_services import is_metadata_unique, save_metadata, get_nft_by_uuid, delete_nft_by_uuid
 
 JSON_RPC_URL = "https://s.altnet.rippletest.net:51234/"
 
@@ -94,40 +93,11 @@ class XrpLedger:
                 uri_hex = nft["URI"]
                 uri = bytes.fromhex(uri_hex).decode('utf-8')
                 nft_data["decoded_uri"] = uri
-
-                if uri.startswith("{") and uri.endswith("}"):
-                    nft_data["metadata"] = json.loads(uri)
-                else:
-                    nft_data["metadata"] = self.fetch_nft_metadata_final(uri)
+                nft_data["metadata"] = get_nft_by_uuid(uri[1:-1])
             nft_list.append(nft_data)
         return nft_list
 
-    def fetch_nft_metadata_final(self, uri):
-        """
-        Fetch NFT metadata from a given URI.
-
-        Args:
-            uri (str): The URI of the metadata.
-
-        Returns:
-            dict or None: The metadata as a dictionary if successful, None otherwise.
-        """
-        try:
-            if uri.startswith("ipfs://"):
-                ipfs_gateway_url = f"https://ipfs.io/ipfs/{uri[7:]}"
-                response = requests.get(ipfs_gateway_url)
-            else:
-                response = requests.get(uri)
-            if response.status_code == 200:
-                return response.json()
-            else:
-                print("Failed to fetch metadata. HTTP Status:", response.status_code)
-                return None
-        except Exception as e:
-            print("Error fetching metadata:", str(e))
-            return None
-
-    def mint_nft(self, wallet: Wallet, metadata: dict):
+    def mint_nft(self, wallet: Wallet, metadata: dict, metadata_id: dict):
         """
         Mint an NFT with the given metadata.
 
@@ -139,10 +109,12 @@ class XrpLedger:
             dict: The result of the transaction.
         """
         if not is_metadata_unique(metadata):
+            delete_nft_by_uuid(metadata_id)
             return {"error": "NFT metadata is not unique. Cannot mint duplicate NFTs."}
-        uri = json.dumps(metadata)
+        uri = json.dumps(metadata_id)
         uri_hex = str_to_hex(uri)
         if len(uri_hex) > 512:
+            delete_nft_by_uuid(metadata_id)
             return {"error": "Metadata exceeds the maximum allowed length of 512 characters."}
         mint_txn = NFTokenMint(
             account=wallet.classic_address,
