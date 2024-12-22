@@ -17,10 +17,10 @@ Relevant details of each cards:
 - [x] Retrieve Wallet
 - [x] Mint NFT
 - [x] Retrieve all NFTs from a Wallet
-- [ ] Create sell offer for an NFT
-- [ ] Create buy offer for an NFT
-- [ ] Accept a buy offer for an NFT
-- [ ] Retrieve all NFT's sell offers
+- [x] Create sell offer for an NFT
+- [x] Accept a sell offer for an NFT
+- [x] Retrieve all NFT's sell offers
+- [x] Retrieve wallet sell offers
 
 ## How to use
 
@@ -34,10 +34,12 @@ On the marketplace you can see offers for other NFT and buy it if you can
 
 ## API
 
-**GET -> /api/wallet/<wallet> |** retrieve your wallet informations
+### Wallet
+**GET -> /api/wallet/<wallet> |** retrieve your wallet information
 
-**POST -> /api/wallet |** create a new wallet (don't forget to save the data)
+**POST -> /api/wallet |** create a new wallet (don't forget to save the seed, public_key and private_key)
 
+### NFT
 **POST -> /api/nft |** create a new NFT
 ```json
 /*Request body*/
@@ -58,8 +60,38 @@ On the marketplace you can see offers for other NFT and buy it if you can
 ```
 **GET -> /api/nft/<wallet> |** return a list of all wallet's NFTs
 
+### Marketplace
 **GET -> /api/offers |** return a list of all offers in the marketplace
 
-**POST -> /api/sellOffer |** create a sell offer for a NFT
+**GET -> /api/offers/<wallet> |** return a list of all offers from a specific wallet
 
-**POST -> /api/buyOffer |** create a buy offer for a NFT
+**POST -> /api/sellOffer |** create a sell offer for a NFT
+```
+/*Request body*/
+{
+    "seed": "",
+    "public_key": "",
+    "private_key": "",
+    "amount": 20
+}
+```
+
+**POST -> /api/accept/<offer_id> |** accept a sell offer
+```
+/*Request body*/
+{
+    "seed": "",
+    "public_key": "",
+    "private_key": ""
+}
+```
+
+**DELETE -> /api/sellOffer/<offer_id> |** delete a specific sell offer
+```
+/*Request body*/
+{
+    "seed": "",
+    "public_key": "",
+    "private_key": ""
+}
+```
