@@ -48,13 +48,19 @@ On the marketplace you can see offers for other NFT and buy it if you can
     "public_key": "",
     "private_key": "",
     "nft": {
-        "name": "My NFT",
-        "edition": "1st",
-        "card_number": "12345",
-        "rarity": "Rare",
-        "type": "Collectible",
-        "image": "https://example.com/image.png",
-        "description": "This is a unique NFT example."
+        "name": "Pikachu 2",
+        "language": "EN",
+        "number": "025",
+        "series": "Base Set",
+        "type": "Electric",
+        "quality": "Mint",
+        "holo": true,
+        "reverse_holo": false,
+        "first_edition": true,
+        "creation_date": "2024-12-22 17:52:10",
+        "front_image": "https://tcgplayer-cdn.tcgplayer.com/product/42402_in_1000x1000.jpg",
+        "back_image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Pokemon_Trading_Card_Game_cardback.jpg/220px-Pokemon_Trading_Card_Game_cardback.jpg",
+        "description": "An electric type Pokemon."
     }
 }
 ```
