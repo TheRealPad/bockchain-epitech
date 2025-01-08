@@ -12,7 +12,7 @@ function Login({ login, createNewWallet }: Props) {
   return (
     <div className="container">
       <label>
-        Bienvenue sur Pokemon TCG Bockchain
+        Welcome to Pokemon TCG Bockchain
       </label>
       <form onSubmit={() => login(seed)}>
         <input
