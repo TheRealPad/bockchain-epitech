@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './login.css';
 
 interface Props {
   login(seed: string): void;
@@ -9,7 +10,10 @@ function Login({ login, createNewWallet }: Props) {
   const [seed, setSeed] = useState("");
 
   return (
-    <div>
+    <div className="container">
+      <label>
+        Bienvenue sur Pokemon TCG Bockchain
+      </label>
       <form onSubmit={() => login(seed)}>
         <input
           onInput={(e) => setSeed(e.target.value)}
@@ -17,9 +21,10 @@ function Login({ login, createNewWallet }: Props) {
         />
         <button type={"submit"}>login</button>
       </form>
-      <button onClick={createNewWallet}>create new wallet</button>
+      <button className="create-wallet" onClick={createNewWallet}>create new wallet</button>
     </div>
   );
 }
 
 export { Login };
+
