@@ -19,7 +19,8 @@ To begin using the platform, you'll need to set up your XRP wallet. Follow these
 ### Create a New Wallet:
 If you don't have an XRP wallet, the platform will guide you through creating one.
 
-Securely store your wallet's secret key and recovery phrase as they are essential for accessing your funds.
+Store your wallet address as you need it to view your informations.
+Securely store your wallet's seed, public and private key as they are essential for handling your funds.
 
 ### Connect an Existing Wallet:
 If you already have an XRP-compatible wallet, simply connect it to the platform.
