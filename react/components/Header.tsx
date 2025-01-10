@@ -1,13 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import CreateNFTModal from "./CreateNFTModal";
 import CreateSellOfferModal from "./CreateSellOfferModal";
 import ViewSellOffersModal from "./ViewSellOffersModal";
 import { PlusCircle, DollarSign, ShoppingBag, Tag, Layers } from "lucide-react";
+import { NFT } from "@/app/apiClient";
 
-export default function Header() {
+type Props = {
+  setNfts: (value: SetStateAction<NFT[]>) => void;
+};
+
+export default function Header({ setNfts }: Props) {
   const [createNFTOpen, setCreateNFTOpen] = useState(false);
   const [createSellOfferOpen, setCreateSellOfferOpen] = useState(false);
   const [viewSellOffersOpen, setViewSellOffersOpen] = useState(false);
@@ -47,6 +52,7 @@ export default function Header() {
         </div>
       </div>
       <CreateNFTModal
+        setNfts={setNfts}
         open={createNFTOpen}
         onClose={() => setCreateNFTOpen(false)}
       />

@@ -18,62 +18,12 @@ import apiClient, { NFT } from "@/app/apiClient";
 import CreateSellOfferModal from "./CreateSellOfferModal";
 import { useEffect, useState } from "react";
 
-async function fetchNFTs() {
-  // const res = await apiClient.getWalletNFTs(
-  //   "rKNJhhy5iBin6tmWpKMEFF7wFySZTL78hT",
-  // );
+type Props = {
+  nfts: NFT[];
+};
 
-  // console.log(res);
-  // const nfts: NFT[] = res.map((item) => JSON.parse(item.decoded_uri));
-  // console.log(nfts);
-  // return nfts;
-
-  // console.log(nfts);
-  return [
-    {
-      card_number: "1",
-      description: "",
-      edition: "1st",
-      name: "Trioxhydre ex",
-      image:
-        "https://dz3we2x72f7ol.cloudfront.net/expansions/surging-sparks/fr-fr/SV08_FR_36-2x.png",
-      rarity: "Legendary",
-      type: "Fire",
-    },
-    {
-      card_number: "2",
-      description: "",
-      edition: "1st",
-      name: "Topiqueur",
-      image:
-        "https://dz3we2x72f7ol.cloudfront.net/expansions/surging-sparks/fr-fr/SV08_FR_31-2x.png",
-      rarity: "Common",
-      type: "Earth",
-    },
-    {
-      card_number: "3",
-      description: "",
-      edition: "1st",
-      name: "Drakaufeu ex",
-      image:
-        "https://dz3we2x72f7ol.cloudfront.net/expansions/surging-sparks/fr-fr/SV08_FR_208-2x.png",
-      rarity: "Rare",
-      type: "Fire",
-    },
-  ];
-}
-
-export default function NFTGrid() {
-  const [nfts, setNfts] = useState<NFT[]>([]);
+export default function NFTGrid({ nfts }: Props) {
   const [createSellOfferOpen, setCreateSellOfferOpen] = useState(false);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchNFTs();
-      setNfts(data);
-    }
-    fetchData();
-  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

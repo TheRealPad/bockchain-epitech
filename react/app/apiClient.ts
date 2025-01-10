@@ -3,6 +3,13 @@ type Wallet = {
   balance: number;
 };
 
+export type SellOffer = {
+  id: string;
+  nftName: string;
+  seller: string;
+  price: number;
+};
+
 type encodedNFT = {
   decoded_uri: string;
 };
