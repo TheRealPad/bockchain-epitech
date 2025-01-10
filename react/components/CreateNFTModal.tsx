@@ -68,7 +68,7 @@ export default function CreateNFTModal({ setNfts, open, onClose }: Props) {
             />
           </div>
           <div className="space-y-2 mb-4">
-            <Label htmlFor="nft-description">Description</Label>
+            <Label htmlFor="nft-description">Description (optional)</Label>
             <Textarea
               id="nft-description"
               value={description}
