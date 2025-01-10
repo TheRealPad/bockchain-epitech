@@ -97,10 +97,6 @@ export default function NFTGrid() {
             <Badge variant="secondary" className="2">
               {nft.rarity}
             </Badge>
-
-            <Button>
-              <Tag />
-            </Button>
           </CardContent>
         </Card>
       ))}
