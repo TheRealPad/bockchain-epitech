@@ -8,22 +8,18 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        <div className="flex gap-1 mb-8 items-center">
+        <div className="flex mb-8 items-center">
           <Wallet size={40} />
           <h1 className="ml-2 text-4xl font-bold  text-foreground">Wallet</h1>
-          <h1 className="ml-2 text-xl font-bold inset-0 transition-opacity duration-300">
-            &lt;
-          </h1>
+
+          <h1 className="ml-5 font-bold">id: &lt;</h1>
           <div className="group relative rounded-md w-fit">
-            <h1 className="text-xl blur-sm hover:blur-none font-bold inset-0 duration-300">
+            <h1 className="blur-sm bg-black hover:blur-none font-bold inset-0 duration-300">
               rKNJhhy5iBin6tmWpKMEFF7wFySZTL78hT
             </h1>
-            {/* <div className="backdrop-blur-sm h-6 rounded-md py-4 group-hover:opacity-0 transition-opacity duration-300 absolute -inset-x-2 top-0" /> */}
           </div>
 
-          <h1 className="text-xl font-bold inset-0 transition-opacity duration-300">
-            &gt;
-          </h1>
+          <h1 className="font-bold">&gt;</h1>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
