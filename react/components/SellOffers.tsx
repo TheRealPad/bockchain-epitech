@@ -16,19 +16,13 @@ import {
   CreditCard,
   ShoppingBag,
 } from "lucide-react";
+import { SellOffer } from "@/app/apiClient";
 
-async function fetchSellOffers() {
-  // This is a placeholder. In a real application, you would fetch sell offers from your backend or blockchain
-  return [
-    { id: "1", nftName: "Trioxhydre ex", seller: "0x1234...5678", price: 0.5 },
-    { id: "2", nftName: "Triopikeur", seller: "0x8765...4321", price: 1.2 },
-    { id: "3", nftName: "Dracaufeu ex", seller: "0x2468...1357", price: 2.0 },
-  ];
+interface Props {
+  sellOffers: SellOffer[];
 }
 
-export default async function SellOffers() {
-  const sellOffers = await fetchSellOffers();
-
+export default function SellOffers({ sellOffers }: Props) {
   return (
     <Card>
       <CardHeader>

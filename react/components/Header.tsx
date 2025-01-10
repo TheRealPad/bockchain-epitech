@@ -1,14 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/mode-toggle";
 import CreateNFTModal from "./CreateNFTModal";
 import CreateSellOfferModal from "./CreateSellOfferModal";
 import ViewSellOffersModal from "./ViewSellOffersModal";
-import { PlusCircle, DollarSign, ShoppingBag, Tag } from "lucide-react";
+import { PlusCircle, DollarSign, ShoppingBag, Tag, Layers } from "lucide-react";
+import { NFT } from "@/app/apiClient";
 
-export default function Header() {
+type Props = {
+  setNfts: (value: SetStateAction<NFT[]>) => void;
+};
+
+export default function Header({ setNfts }: Props) {
   const [createNFTOpen, setCreateNFTOpen] = useState(false);
   const [createSellOfferOpen, setCreateSellOfferOpen] = useState(false);
   const [viewSellOffersOpen, setViewSellOffersOpen] = useState(false);
@@ -16,7 +20,10 @@ export default function Header() {
   return (
     <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40 w-full border-b border-border">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-foreground">NFT Dashboard</h1>
+        <div className="flex gap-2">
+          <Layers />
+          <h1 className="text-xl font-bold text-foreground">NFT Dashboard</h1>
+        </div>
         <div className="flex items-center space-x-4">
           <Button
             onClick={() => setCreateNFTOpen(true)}
@@ -45,6 +52,7 @@ export default function Header() {
         </div>
       </div>
       <CreateNFTModal
+        setNfts={setNfts}
         open={createNFTOpen}
         onClose={() => setCreateNFTOpen(false)}
       />
