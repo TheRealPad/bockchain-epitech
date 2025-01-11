@@ -19,6 +19,7 @@ async function fetchNFTs(wallet: string) {
   // return nfts;
 
   // console.log(nfts);
+  if (wallet != "rDWmQWtT62DYeApD4r1SWi7gFHr6SqEyX4") return [];
   return [
     {
       card_number: "1",
