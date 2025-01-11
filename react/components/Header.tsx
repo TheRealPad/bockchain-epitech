@@ -6,13 +6,23 @@ import CreateNFTModal from "./CreateNFTModal";
 import CreateSellOfferModal from "./CreateSellOfferModal";
 import ViewSellOffersModal from "./ViewSellOffersModal";
 import { PlusCircle, DollarSign, ShoppingBag, Tag, Layers } from "lucide-react";
-import { NFT } from "@/app/apiClient";
+import { NFT, SellOffer } from "@/app/apiClient";
 
 type Props = {
+  wallet: string;
+  nfts: NFT[];
   setNfts: (value: SetStateAction<NFT[]>) => void;
+  sellOffers: SellOffer[];
+  setSellOffers: (value: SetStateAction<SellOffer[]>) => void;
 };
 
-export default function Header({ setNfts }: Props) {
+export default function Header({
+  wallet,
+  nfts,
+  setNfts,
+  sellOffers,
+  setSellOffers,
+}: Props) {
   const [createNFTOpen, setCreateNFTOpen] = useState(false);
   const [createSellOfferOpen, setCreateSellOfferOpen] = useState(false);
   const [viewSellOffersOpen, setViewSellOffersOpen] = useState(false);
@@ -57,10 +67,14 @@ export default function Header({ setNfts }: Props) {
         onClose={() => setCreateNFTOpen(false)}
       />
       <CreateSellOfferModal
+        wallet={wallet}
+        nfts={nfts}
+        setSellOffers={setSellOffers}
         open={createSellOfferOpen}
         onClose={() => setCreateSellOfferOpen(false)}
       />
       <ViewSellOffersModal
+        sellOffers={sellOffers}
         open={viewSellOffersOpen}
         onClose={() => setViewSellOffersOpen(false)}
       />

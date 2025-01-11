@@ -5,16 +5,14 @@ import { Suspense, useEffect, useState } from "react";
 import TopBar from "@/components/Header";
 import NFTGrid from "@/components/NFTGrid";
 import SellOffers from "@/components/SellOffers";
-import Login from '@/components/Login';
+import Login from "@/components/Login";
 import { Wallet } from "lucide-react";
 import { NFT, SellOffer } from "./apiClient";
 import apiClient from "./apiClient";
 
-async function fetchNFTs() {
-  // const res = await apiClient.getWalletNFTs(
-  //   "rKNJhhy5iBin6tmWpKMEFF7wFySZTL78hT",
-  // );
-
+async function fetchNFTs(wallet: string) {
+  // const res = await apiClient.getWalletNFTs(wallet);
+  //
   // console.log(res);
   // const nfts: NFT[] = res.map((item) => JSON.parse(item.decoded_uri));
   // console.log(nfts);
@@ -26,7 +24,7 @@ async function fetchNFTs() {
       card_number: "1",
       description: "",
       edition: "1st",
-      name: "Trioxhydre ex",
+      name: "Malvalame ex",
       image:
         "https://dz3we2x72f7ol.cloudfront.net/expansions/surging-sparks/fr-fr/SV08_FR_36-2x.png",
       rarity: "Legendary",
@@ -36,7 +34,7 @@ async function fetchNFTs() {
       card_number: "2",
       description: "",
       edition: "1st",
-      name: "Topiqueur",
+      name: "Flamigator",
       image:
         "https://dz3we2x72f7ol.cloudfront.net/expansions/surging-sparks/fr-fr/SV08_FR_31-2x.png",
       rarity: "Common",
@@ -46,10 +44,10 @@ async function fetchNFTs() {
       card_number: "3",
       description: "",
       edition: "1st",
-      name: "Drakaufeu ex",
+      name: "Triopikeur",
       image:
         "https://dz3we2x72f7ol.cloudfront.net/expansions/surging-sparks/fr-fr/SV08_FR_208-2x.png",
-      rarity: "Rare",
+      rarity: "Ultra Rare",
       type: "Fire",
     },
   ];
@@ -58,9 +56,8 @@ async function fetchNFTs() {
 async function fetchSellOffers() {
   // This is a placeholder. In a real application, you would fetch sell offers from your backend or blockchain
   return [
-    { id: "1", nftName: "Trioxhydre ex", seller: "0x1234...5678", price: 0.5 },
-    { id: "2", nftName: "Triopikeur", seller: "0x8765...4321", price: 1.2 },
-    { id: "3", nftName: "Dracaufeu ex", seller: "0x2468...1357", price: 2.0 },
+    { id: "2", nftName: "Malosse", seller: "rrhE...kydc", price: 0.2 },
+    { id: "3", nftName: "Dracaufeu ex", seller: "rNjG...EBUP", price: 4.5 },
   ];
 }
 
@@ -71,14 +68,15 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function fetchData() {
-      const dataNft = await fetchNFTs();
+      if (!walletAddress) return;
+      const dataNft = await fetchNFTs(walletAddress);
       const dataOffer = await fetchSellOffers();
       setNfts(dataNft);
       setSellOffers(dataOffer);
     }
     fetchData();
-  }, []);
-  
+  }, [walletAddress]);
+
   // Cette fonction sera appelée quand un utilisateur créera ou se connectera à un wallet
   const handleLogin = (walletAddress: string) => {
     setWalletAddress(walletAddress); // Mets à jour l'état avec l'adresse du wallet après un login réussi
@@ -86,20 +84,28 @@ export default function Dashboard() {
 
   return (
     <div>
-      { !walletAddress ? (
+      {!walletAddress ? (
         <Login login={handleLogin} />
-      ) :
+      ) : (
         <div className="min-h-screen bg-background">
-          <Header setNfts={setNfts} />
+          <Header
+            wallet={walletAddress}
+            nfts={nfts}
+            setNfts={setNfts}
+            sellOffers={sellOffers}
+            setSellOffers={setSellOffers}
+          />
           <main className="container mx-auto px-4 py-8">
             <div className="flex mb-8 items-center">
               <Wallet size={40} />
-              <h1 className="ml-2 text-4xl font-bold  text-foreground">Wallet</h1>
+              <h1 className="ml-2 text-4xl font-bold  text-foreground">
+                Wallet
+              </h1>
 
-              <h1 className="ml-5 font-bold">id: &lt;</h1>
+              <h1 className="ml-5 font-bold">adresse: &lt;</h1>
               <div className="group relative rounded-md w-fit">
                 <h1 className="blur-sm bg-black hover:blur-none font-bold inset-0 duration-300">
-                  rKNJhhy5iBin6tmWpKMEFF7wFySZTL78hT
+                  {walletAddress}
                 </h1>
               </div>
 
@@ -116,7 +122,7 @@ export default function Dashboard() {
             </div>
           </main>
         </div>
-      }
+      )}
     </div>
   );
 }

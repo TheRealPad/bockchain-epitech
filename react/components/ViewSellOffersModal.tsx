@@ -26,29 +26,14 @@ interface SellOffer {
 }
 
 export default function ViewSellOffersModal({
+  sellOffers,
   open,
   onClose,
 }: {
+  sellOffers: SellOffer[];
   open: boolean;
   onClose: () => void;
 }) {
-  const [sellOffers, setSellOffers] = useState<SellOffer[]>([]);
-
-  useEffect(() => {
-    // This is a placeholder. In a real application, you would fetch sell offers from your backend or blockchain
-    const mockSellOffers: SellOffer[] = [
-      { id: "1", nftName: "Cool NFT #1", seller: "0x1234...5678", price: 0.5 },
-      {
-        id: "2",
-        nftName: "Awesome NFT #2",
-        seller: "0x8765...4321",
-        price: 1.2,
-      },
-      { id: "3", nftName: "Rare NFT #3", seller: "0x2468...1357", price: 2.0 },
-    ];
-    setSellOffers(mockSellOffers);
-  }, []);
-
   const handleAcceptOffer = (offerId: string) => {
     // Here you would handle the logic to accept a sell offer
     console.log("Accepting offer:", offerId);

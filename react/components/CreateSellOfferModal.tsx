@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -17,12 +17,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DollarSign, Tag } from "lucide-react";
+import { Tag } from "lucide-react";
+import { NFT, SellOffer } from "@/app/apiClient";
 
 export default function CreateSellOfferModal({
+  wallet,
+  nfts,
+  setSellOffers,
   open,
   onClose,
 }: {
+  wallet: string;
+  nfts: NFT[];
+  setSellOffers: (value: SetStateAction<SellOffer[]>) => void;
   open: boolean;
   onClose: () => void;
 }) {
@@ -33,8 +40,20 @@ export default function CreateSellOfferModal({
     e.preventDefault();
     // Here you would handle the sell offer creation logic
     console.log("Creating sell offer:", { selectedNFT, price });
+    const croppedWallet = wallet.slice(0, 4) + "..." + wallet.slice(-4);
+    const newOffer = {
+      id: "",
+      nftName: selectedNFT,
+      seller: croppedWallet,
+      price: Number(price),
+    };
+
+    setSellOffers((prevOffers) => [...prevOffers, newOffer]);
+
     onClose();
   };
+
+  if (!nfts) return;
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -50,9 +69,11 @@ export default function CreateSellOfferModal({
                 <SelectValue placeholder="Select an NFT" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="nft1">Cool NFT #1</SelectItem>
-                <SelectItem value="nft2">Awesome NFT #2</SelectItem>
-                <SelectItem value="nft3">Rare NFT #3</SelectItem>
+                {nfts.map((nft, index) => (
+                  <SelectItem key={index} value={nft.name}>
+                    {nft.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>

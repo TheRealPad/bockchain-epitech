@@ -1,30 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { EyeIcon, HeartIcon, ShoppingCart, Tag } from "lucide-react";
-import pokemon1 from "../public/pokemon1.png";
-import pokemon2 from "../public/pokemon2.png";
-import pokemon3 from "../public/pokemon3.png";
-import { Button } from "./ui/button";
-import apiClient, { NFT } from "@/app/apiClient";
-import CreateSellOfferModal from "./CreateSellOfferModal";
-import { useEffect, useState } from "react";
+import { NFT } from "@/app/apiClient";
 
 type Props = {
   nfts: NFT[];
 };
 
 export default function NFTGrid({ nfts }: Props) {
-  const [createSellOfferOpen, setCreateSellOfferOpen] = useState(false);
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {nfts.map((nft) => (
@@ -44,16 +29,14 @@ export default function NFTGrid({ nfts }: Props) {
             <CardTitle className="text-lg font-semibold mb-2">
               {nft.name}
             </CardTitle>
-            <Badge variant="secondary" className="2">
+            <Badge
+              variant={nft.rarity === "Legendary" ? "default" : "secondary"}
+            >
               {nft.rarity}
             </Badge>
           </CardContent>
         </Card>
       ))}
-      <CreateSellOfferModal
-        open={createSellOfferOpen}
-        onClose={() => setCreateSellOfferOpen(false)}
-      />
     </div>
   );
 }
